@@ -22,6 +22,16 @@ router.post(
   ctrlWrapper(ctrl.register)
 );
 
+// verify
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+
+// verify repeat, if email didn't receive by new user
+router.post(
+  "/verify",
+  validateBody(schemas.verifyEmailSchema),
+  ctrlWrapper(ctrl.resendVerify)
+);
+
 // signin
 router.post(
   "/login",
