@@ -12,7 +12,6 @@ const verify = async (req, res) => {
     verificationToken: null,
   });
   res.json({
-    status: 200,
     message: "Verification successful",
   });
 };

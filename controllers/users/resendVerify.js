@@ -4,9 +4,11 @@ const { User } = require("../../models/user");
 const resendVerify = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
+
   if (!user) {
-    throw RequestError(400, "missing required field email");
+    throw RequestError(400, "email is wrong or not registered");
   }
+
   if (user.verify) {
     throw RequestError(400, "Verification has already been passed");
   }
@@ -15,7 +17,6 @@ const resendVerify = async (req, res) => {
   await sendEmail(mail);
 
   res.json({
-    status: 200,
     message: "Verification email sent",
   });
 };

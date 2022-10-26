@@ -9,6 +9,7 @@ const {
   validateBodySubscription,
   authenticate,
   upload,
+  validateBodyEmail,
 } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
@@ -28,7 +29,7 @@ router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
 // verify repeat, if email didn't receive by new user
 router.post(
   "/verify",
-  validateBody(schemas.verifyEmailSchema),
+  validateBodyEmail(schemas.verifyEmailSchema),
   ctrlWrapper(ctrl.resendVerify)
 );
 
